@@ -29,6 +29,8 @@ services:
       test: ["CMD", "lsof", "-t", "-i:2122"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
       retries: 5
+    networks:
+      - api_db
   db:
     image: mysql
     container_name: database
@@ -37,7 +39,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=facilita_system
-      - MYSQL_USER=root
       - MYSQL_PASSWORD=root
     restart: 'always'
     expose:
@@ -46,3 +47,8 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
       timeout: 10s
       retries: 5
+    networks:
+      - api_db
+networks:
+  api_db:
+    driver: bridge
