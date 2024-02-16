@@ -4,7 +4,7 @@ import TaskService from '../services/tasks.service';
 
 export default class TaskController {
   constructor(private taskService = new TaskService()) {}
-  
+
   public async createTask(req: Request, res: Response) {
     const { title, status, priority } = req.body;
     const taskData = { title, status, priority };
@@ -14,7 +14,15 @@ export default class TaskController {
     if (newTask) {
       return res.status(statusCode.CREATED).json(newTask);
     } else {
-      return res.status(statusCode.INTERNAL_SERVER_ERROR).json({ error: 'Erro ao adicionar tarefa' });
+      return res
+        .status(statusCode.INTERNAL_SERVER_ERROR)
+        .json({ error: 'Erro ao adicionar tarefa' });
     }
+  }
+
+  public async getAllTasks(req: Request, res: Response) {
+    const allTasks = await this.taskService.getAllTasks();
+
+    return res.status(statusCode.OK).json(allTasks);
   }
 }
