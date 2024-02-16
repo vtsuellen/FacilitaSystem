@@ -17,4 +17,9 @@ export default class TaskService {
     const tasks = await this.taskModel.getAllTasks();
     return tasks;
   }
+
+  public async updateTask(taskData: ITask): Promise<ITask | null> {
+    const updatedTask = await this.taskModel.updateTask(taskData);
+    return updatedTask;
+  }
 }

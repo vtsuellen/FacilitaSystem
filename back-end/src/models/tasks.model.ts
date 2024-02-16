@@ -12,5 +12,12 @@ export default class TaskModel {
     return await this.model.findAll();
   }
 
- 
+  async updateTask(task: ITask): Promise<ITask | null> {
+    const existingTask = await this.model.findByPk(task.id);
+    if (existingTask) {
+      await existingTask.update(task);
+      return existingTask;
+    }
+    return null;
+  }
 }

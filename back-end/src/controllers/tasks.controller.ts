@@ -25,4 +25,18 @@ export default class TaskController {
 
     return res.status(statusCode.OK).json(allTasks);
   }
+  
+  public async updateTask(req: Request, res: Response) {
+    const { id, title, status, priority } = req.body;
+    const taskData = { id, title, status, priority };
+
+    const updatedTask = await this.taskService.updateTask(taskData);
+
+    if (updatedTask) {
+      return res.status(statusCode.OK).json(updatedTask);
+    } else {
+      return res.status(statusCode.INTERNAL_SERVER_ERROR).json({ error: 'Erro ao atualizar tarefa' });
+    }
+  }
+
 }
