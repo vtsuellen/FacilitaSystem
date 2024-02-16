@@ -25,7 +25,7 @@ export default class TaskController {
 
     return res.status(statusCode.OK).json(allTasks);
   }
-  
+
   public async updateTask(req: Request, res: Response) {
     const { id, title, status, priority } = req.body;
     const taskData = { id, title, status, priority };
@@ -35,8 +35,24 @@ export default class TaskController {
     if (updatedTask) {
       return res.status(statusCode.OK).json(updatedTask);
     } else {
-      return res.status(statusCode.INTERNAL_SERVER_ERROR).json({ error: 'Erro ao atualizar tarefa' });
+      return res
+        .status(statusCode.INTERNAL_SERVER_ERROR)
+        .json({ error: 'Erro ao atualizar tarefa' });
     }
   }
 
+  public async deleteTask(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const deleteTask = await this.taskService.deleteTask(id);
+    if (deleteTask) {
+      return res
+        .status(statusCode.OK)
+        .json({ message: 'Tarefa excluída com sucesso' });
+    } else {
+      return res
+        .status(statusCode.INTERNAL_SERVER_ERROR)
+        .json({ error: 'Erro ao excluir tarefa' });
+    }
+  }
 }
