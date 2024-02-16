@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/server.ts' -e ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc",
     "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:migrate": "npx tsc && npx sequelize-cli db:migrate --env development",
     "sequelize": "npx sequelize-cli init"
