@@ -24,6 +24,16 @@ export default function Home() {
         });
     }
   };
+  const removeTask = (id: Number) => {
+    Api.delete(`/tasks/${id}`)
+      .then(() => {
+        // Remove a tarefa da lista de tarefas após a exclusão
+        newTasks(tasks.filter((task) => task.id !== id));
+      })
+      .catch((error) => {
+        console.error('Erro ao remover a tarefa:', error);
+      });
+  };
 
   // Remove espaços em branco e verifica se o input não está vazio
   const disabledButton = valueInput.trim() !== '';
@@ -62,14 +72,14 @@ export default function Home() {
               >
                 <span className='flex-grow break-all p-1'>{task.title}</span>
                 <button
+                  onClick={() => removeTask(task.id)}
                   className='text-red-500 hover:text-red-700 transition duration-300 focus:outline-none items-center justify-center cursor-pointer flex'
                 >
-                  <FontAwesomeIcon icon={faXmark} className='h-5 w-5'/>
+                  <FontAwesomeIcon icon={faXmark} className='h-5 w-5' />
                 </button>
                 <button className='ml-2 text-blue-500 hover:text-blue-700 transition duration-300 focus:outline-none items-center justify-center flex'>
                   <FontAwesomeIcon icon={faPen} />
                 </button>
-                
               </li>
             ))}
         </ul>
