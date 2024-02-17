@@ -23,7 +23,7 @@ export default class TaskService {
     return updatedTask;
   }
 
-  public async deleteTask(id: string): Promise<boolean> {
+  public async deleteTask(id: number): Promise<boolean> {
     const isDeleted = await this.taskModel.deleteTask(id);
     return isDeleted;
   }

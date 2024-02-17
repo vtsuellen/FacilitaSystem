@@ -21,8 +21,8 @@ export default class TaskModel {
     return null;
   }
 
-  async deleteTask(id: number | string): Promise<boolean> {
-    const deletedRows = await this.model.destroy({ where: { id: Number(id) } });
+  async deleteTask(id: number): Promise<boolean> {
+    const deletedRows = await this.model.destroy({ where: { id } });
     return deletedRows > 0;
   }
 }

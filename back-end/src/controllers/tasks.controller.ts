@@ -27,8 +27,9 @@ export default class TaskController {
   }
 
   public async updateTask(req: Request, res: Response) {
-    const { id, title, status, priority } = req.body;
-    const taskData = { id, title, status, priority };
+    const { title, status, priority } = req.body;
+    const { id } = req.params;
+    const taskData = {id: Number(id), title, status, priority };
 
     const updatedTask = await this.taskService.updateTask(taskData);
 
@@ -44,7 +45,7 @@ export default class TaskController {
   public async deleteTask(req: Request, res: Response) {
     const { id } = req.params;
 
-    const deleteTask = await this.taskService.deleteTask(id);
+    const deleteTask = await this.taskService.deleteTask(Number(id));
     if (deleteTask) {
       return res
         .status(statusCode.OK)
