@@ -6,6 +6,7 @@ import Api from '../../Api';
 import { ITasks } from '@/types/tasks';
 import ModalUpdate from '@/components/modal';
 import FormAddTask from '@/components/formAddTask';
+import ListTasks from '@/components/listTaskss';
 
 export default function Home() {
   const [valueInput, newValueInput] = useState('');
@@ -62,29 +63,11 @@ export default function Home() {
             newValueInput={newValueInput}
             disabledButton={disabledButton}
           />
-          <ul>
-            {tasks &&
-              tasks.map((task, index) => (
-                <li
-                  key={index}
-                  className='flex items-center justify-between bg-gray-100 p-2 rounded mt-2 '
-                >
-                  <span className='flex-grow break-all p-1'>{task.title}</span>
-                  <button
-                    onClick={() => removeTask(task.id)}
-                    className='text-red-500 hover:text-red-700 transition duration-300 focus:outline-none items-center justify-center cursor-pointer flex'
-                  >
-                    <FontAwesomeIcon icon={faXmark} className='h-5 w-5' />
-                  </button>
-                  <button
-                    onClick={() => updateTask(task.id)}
-                    className='ml-2 text-blue-500 hover:text-blue-700 transition duration-300 focus:outline-none items-center justify-center flex'
-                  >
-                    <FontAwesomeIcon icon={faPen} />
-                  </button>
-                </li>
-              ))}
-          </ul>
+          <ListTasks
+            tasks={tasks}
+            removeTask={removeTask}
+            updateTask={updateTask}
+          />
         </div>
       </main>
       <ModalUpdate
