@@ -10,5 +10,4 @@ COPY . .
 # Sinalize que aplicação expõe a porta 3000
 EXPOSE 3000
 # Configurar os comandos para iniciar a aplicação 
-ENTRYPOINT [ "npm" ]
-CMD ["run", "dev"]
+CMD ["npm", "run", "dev"]

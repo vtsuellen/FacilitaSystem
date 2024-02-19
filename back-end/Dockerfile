@@ -10,5 +10,4 @@ COPY . .
 # Sinalize que aplicação expõe a porta 2122
 EXPOSE 2122
 # Configurar os comandos para iniciar a aplicação 
-ENTRYPOINT [ "npm" ]
-CMD ["run", "dev"]
+CMD ["npm", "run", "dev"]
