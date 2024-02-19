@@ -1,17 +1,15 @@
 'use client';
-import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import Api from '../../Api';
-import { ITasks } from '@/types/tasks';
+import { ITask, ITasks } from '@/types/tasks';
 import ModalUpdate from '@/components/modal';
 import FormAddTask from '@/components/formAddTask';
-import ListTasks from '@/components/listTaskss';
+import ListTasks from '@/components/listTasks';
 
 export default function Home() {
   const [valueInput, newValueInput] = useState('');
   const [tasks, newTasks] = useState<ITasks>([]);
-  const [selectedTaskId, setSelectedTaskId] = useState<Number | null>(null);
+  const [selectedTask, setSelectedTask] = useState<ITask | null>(null);
 
   const addTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,8 +37,9 @@ export default function Home() {
       });
   };
 
-  const updateTask = (id: Number) => {
-    setSelectedTaskId(id);
+  const updateTask = (task: ITask) => {
+    setSelectedTask(task);
+
   };
 
   // Remove espaços em branco e verifica se o input não está vazio
@@ -73,8 +72,8 @@ export default function Home() {
       <ModalUpdate
         tasks={tasks}
         newTasks={newTasks}
-        selectedTaskId={selectedTaskId}
-        setSelectedTaskId={setSelectedTaskId}
+        selectedTask={selectedTask}
+        setSelectedTask={setSelectedTask}
       />
     </>
   );

@@ -1,13 +1,16 @@
-export type ITasks = {
-  id: Number,
-  title: String,
-  status: Boolean,
-  priority: String
-}[]
+export type ITask = {
+  id: number,
+  title: string,
+  status: boolean,
+  priority: string
+}
+
+export type ITasks = ITask[]
+
 
 export type IModal = {
   tasks: ITasks,
   newTasks: (tasks: ITasks) => void,
-  selectedTaskId: Number | null,
-  setSelectedTaskId: (id: Number | null) => void
+  selectedTask: ITask | null,
+  setSelectedTask: (task: ITask| null) => void
 }
