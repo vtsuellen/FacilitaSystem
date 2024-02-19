@@ -6,8 +6,8 @@ services:
     ports:
       - 3000:3000
     working_dir: /front-end
-    volumes: 
-      - ./front-end:/front-end
+    # volumes: 
+    #   - ./front-end:/front-end
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3000"] 
       timeout: 10s
@@ -18,8 +18,8 @@ services:
     ports:
       - 2122:2122
     working_dir: /back-end
-    volumes: 
-      - ./back-end:/back-end
+    # volumes: 
+    #   - ./back-end:/back-end
     depends_on:
       db:
         condition: service_healthy
