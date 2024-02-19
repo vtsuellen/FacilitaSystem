@@ -1,6 +1,4 @@
 import express from 'express';
-
-import { Router, Request, Response } from 'express';
 import tasks from './routes/tasks.router';
 import cors from 'cors';
 
