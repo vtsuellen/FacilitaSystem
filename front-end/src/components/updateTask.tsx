@@ -3,26 +3,29 @@ import Api from '../../Api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Input from './input';
+import Priority from './priority';
+import { ITask } from '@/types/tasks';
 
 export default function UpdateTaskForm({
-  taskId,
+  task,
   onUpdate,
-  setSelectedTaskId,
+  setSelectedTask,
 }: {
-  taskId: Number;
-  onUpdate: (task: any) => void;
-  setSelectedTaskId: (id: Number | null) => void;
+  task: ITask;
+  onUpdate: (task: ITask) => void;
+  setSelectedTask: (task: ITask | null) => void;
 }) {
-  const [title, setTitle] = useState('');
-  
+  const [title, setTitle] = useState(task.title);
+  const [priority, setPriority] = useState(task.priority);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    Api.put(`/tasks/${taskId}`, { title })
+
+    Api.put(`/tasks/${task.id}`, { title, priority })
       .then((response) => {
         onUpdate(response.data);
         setTitle('');
+        setPriority('');
       })
       .catch((error) => {
         console.error('Erro ao atualizar a tarefa:', error);
@@ -30,10 +33,10 @@ export default function UpdateTaskForm({
   };
 
   const handleCancel = () => {
-    setSelectedTaskId(null);
+    setSelectedTask(null);
   };
 
-  const disabledButton = title.trim() !== '';
+  const disabledButton = title.trim() !== '' && priority !== '';
 
   return (
     <div className='bg-white p-4 rounded-lg shadow-md'>
@@ -43,8 +46,11 @@ export default function UpdateTaskForm({
         className='flex items-center justify-between gap-2'
       >
         <Input value={title} onChange={setTitle} />
-
-        <button type='submit' disabled={!disabledButton} className='text-green-600 hover:text-green-700'>
+        <button
+          type='submit'
+          disabled={!disabledButton}
+          className='text-green-600 hover:text-green-700'
+        >
           <FontAwesomeIcon icon={faCheck} className='h-5 w-5' />
         </button>
         <button
@@ -54,6 +60,7 @@ export default function UpdateTaskForm({
           <FontAwesomeIcon icon={faXmark} className='h-5 w-5' />
         </button>
       </form>
+      <Priority priority={priority} setPriority={setPriority} />
     </div>
   );
 }
