@@ -20,5 +20,5 @@ Este é um projeto de aplicativo de Gerenciador de tarefas (Todo List) Full-stac
 Certifique-se de ter o Docker instalado. Na pasta raiz do projeto, execute o seguinte comando para iniciar o container do MySQL e aplicação Front-end/Back-end:
 
       
-    docker-compose up -d 
+    docker-compose up -d --build
      
