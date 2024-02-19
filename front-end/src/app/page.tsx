@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Api from '../../Api';
 import { ITask, ITasks } from '@/types/tasks';
-import ModalUpdate from '@/components/modal';
+import ModalUpdate from '@/components/modalUpdate';
 import FormAddTask from '@/components/formAddTask';
 import ListTasks from '@/components/listTasks';
 
