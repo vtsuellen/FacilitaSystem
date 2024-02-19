@@ -6,10 +6,9 @@ export default class TaskController {
   constructor(private taskService = new TaskService()) {}
 
   public async createTask(req: Request, res: Response) {
-    const { title, status, priority } = req.body;
-    const taskData = { title, status, priority };
+    const { title } = req.body;
 
-    const newTask = await this.taskService.createTask(taskData);
+    const newTask = await this.taskService.createTask(title);
 
     if (newTask) {
       return res.status(statusCode.CREATED).json(newTask);
@@ -29,7 +28,7 @@ export default class TaskController {
   public async updateTask(req: Request, res: Response) {
     const { title, status, priority } = req.body;
     const { id } = req.params;
-    const taskData = {id: Number(id), title, status, priority };
+    const taskData = { id: Number(id), title, status, priority };
 
     const updatedTask = await this.taskService.updateTask(taskData);
 

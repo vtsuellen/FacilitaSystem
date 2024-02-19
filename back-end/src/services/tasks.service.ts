@@ -4,9 +4,9 @@ import { ITask } from '../interfaces/tasks';
 export default class TaskService {
   constructor(private taskModel = new TaskModel()) {}
 
-  public async createTask(taskData: ITask): Promise<ITask> {
+  public async createTask(title: string): Promise<ITask> {
     const newTask = await this.taskModel.createTasks({
-      ...taskData,
+      title,
       status: false,
       priority: 'baixa',
     });
