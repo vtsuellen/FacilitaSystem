@@ -39,7 +39,6 @@ export default function Home() {
 
   const updateTask = (task: ITask) => {
     setSelectedTask(task);
-
   };
 
   // Remove espaços em branco e verifica se o input não está vazio

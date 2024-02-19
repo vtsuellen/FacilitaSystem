@@ -20,7 +20,7 @@ export default function ListTasks({
             key={index}
             className='flex items-center justify-between bg-gray-100 p-2 rounded mt-2 '
           >
-            <StatusTask taskId={task.id} />
+            <StatusTask task={task} />
             <span className='flex-grow break-all p-1'>{task.title}</span>
             <button
               onClick={() => removeTask(task.id)}
