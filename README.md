@@ -21,4 +21,7 @@ Certifique-se de ter o Docker instalado. Na pasta raiz do projeto, execute o seg
 
       
     docker-compose up -d --build
-     
+
+Depois que o contêiner estiver em execução, você precisará aplicar as migrações do banco de dados. Abra um terminal no container de Back-end, em seguida, execute o seguinte comando para executar as migrações:
+
+      npm run db:migrate
